@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; img-src 'self' data:; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <link rel="stylesheet" href="css/index.css">
+		<link rel="stylesheet" type="text/css" href="js/jquery-1.5.0.mobile.min.css">
+		<style>
+		/* For avoiding title truncation in wp8 */
+		.ui-header .ui-title {
+				overflow: visible !important;
+		}
+		/* For fixing the absolute position issue for the default cordova gen page*/
+		#cjp-accordion1 .app {
+				left: 5px !important;
+				margin: 5px !important;
+				position: relative !important;
+		}
+		#pictureParagraph, #picturePG, #devicePG, #locationPG {
+			text-align: center;
+		}
+
+		#listList {
+			margin-top: 40px;
+		}
+
+		#back-btn {
+			float: left;
+			text-align: center;
+			width: 50px;
+		}
+
+		#forward-btn {
+			float: right;
+			text-align: center;
+			width: 50px;
+		}
+		</style>
+        <title>Hello World</title>
+    </head>
+    <body>		<!-- page 1 -->
+		<div data-role="page" id="devicePage">
+			<div data-role="header">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#devicePage" class="ui-btn-active ui-state-persist">Page 1</a></li>
+						<li><a href="#picturePage">Page 2</a></li>
+						<li><a href="#locationPage">Page 3</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+			<div class="ui-content">
+				<div>
+					<a href="#locationPage" data-transition="slide" data-role="button" data-icon="back" id="back-btn" class="">BACK</a>
+					<a href="#picturePage" data-transition="slide" data-role="button" data-icon="forward" id="forward-btn">NEXT</a>
+				</div>
+				<p id="devicePG">Виртуална библиотека</p>
+				<ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow" id="listList">
+					<body onload="startApp()">
+						<header id="menu">
+							<a href="#" id="linkHome">Home</a>
+							<a href="#" id="linkLogin">Login</a>
+							<a href="#" id="linkRegister">Register</a>
+							<a href="#picturePage" id="linkListBooks">List Books</a>
+							<a href="##picturePage" id="linkCreateBook">Create Book</a>
+							<a href="#" id="linkLogout">Logout</a>
+							<span id="loggedInUser"></span>
+						</header>
+						<main>
+							<section id="loadingBox">Loading...</section>
+							<section id="infoBox">Info</section>
+							<section id="errorBox">Error</section>
+					
+							<section id="viewHome">
+								<h1>Welcome</h1>
+								Welcome to our library.
+							</section>
+					
+							<section id="viewLogin">
+								<h1>Please login</h1>
+								<form id="formLogin">
+									<div>Username:</div>
+									<div><input type="text" name="username" required /></div>
+									<div>Password:</div>
+									<div><input type="password" name="passwd" required></div>
+									<div><input type="button" id="buttonLoginUser" value="Login"></div>
+								</form>
+							</section>
+					
+							<section id="viewRegister">
+								<h1>Please register here</h1>
+								<form id="formRegister">
+									<div>Username:</div>
+									<div><input type="text" name="username" required /></div>
+									<div>Password:</div>
+									<div><input type="password" name="passwd" required></div>
+									<div><input type="button" id="buttonRegisterUser" value="Register" /></div>
+								</form>
+							</section>
+					
+							<section id="viewBooks">
+								<h1>Books</h1>
+								<div id="books">
+									<table>
+										<tr>
+											<th>Title</th>
+											<th>Author</th>
+											<th>Description</th>
+											<th>Actions</th>
+										</tr>
+									</table>
+								</div>
+							</section>
+					
+							<section id="viewCreateBook">
+								<h1>Create new book</h1>
+								<form id="formCreateBook">
+									<div>Title:</div>
+									<div><input type="text" name="title" required /></div>
+									<div>Author:</div>
+									<div><input type="text" name="author" required /></div>
+									<div>Description:</div>
+									<div><textarea name="descr" rows="10" required></textarea></div>
+									<div><input type="button" id="buttonCreateBook" value="Create" /></div>
+								</form>
+							</section>
+					
+							<section id="viewEditBook">
+								<h1>Edit existing book:</h1>
+								<form id="formEditBook">
+									<div><input type="hidden" name="id" required /></div>
+									<div>Title:</div>
+									<div><input type="text" name="title" required /></div>
+									<div>Author:</div>
+									<div><input type="text" name="author" required /></div>
+									<div>Description:</div>
+									<div><textarea name="descr" rows="10" required></textarea></div>
+									<div><input type="button" id="buttonEditBook" value="Edit" /></div>
+								</form>
+							</section>
+				</ul>		
+			</div><!-- end page 1 content -->
+			
+			<div data-role="footer" data-position="fixed">
+				<p id="pictureParagraph">Make picture
+					<a href="#picturePage" data-transition="slide" data-role="button" data-icon="camera">Camera</a>
+				</p>
+			</div><!-- /footer -->
+		</div>
+		<!-- /page1 -->
+
+				<!-- page 2 -->
+		<div data-role="page" id="picturePage">
+			<div data-role="header">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#devicePage">Page 1</a></li>
+						<li><a href="#picturePage" class="ui-btn-active ui-state-persist">Page 2</a></li>
+						<li><a href="#locationPage">Page 3</a></li>
+					</ul>
+				</div><!-- /navbar -->	
+			</div>
+			
+			<div class="ui-content">
+				<div>
+					<a href="#devicePage" data-transition="slide" data-role="button" data-icon="back" id="back-btn" class="">BACK</a>
+					<a href="#locationPage" data-transition="slide" data-role="button" data-icon="forward" id="forward-btn">NEXT</a>
+				</div>
+				<p id="picturePG">Picture Page</p>
+			</div><!-- end page 2 content -->
+			
+			<div data-role="footer" data-position="fixed">
+				<p id="pictureParagraph">No Rights Reserved</p>
+			</div><!-- /footer -->
+		</div><!-- /page2 -->
+		
+				<!-- page 3 -->
+		<div data-role="page" id="locationPage">
+			<div data-role="header">				
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#devicePage">Page 1</a></li>
+						<li><a href="#picturePage">Page 2</a></li>
+						<li><a href="#locationPage" class="ui-btn-active ui-state-persist">Page 3</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+			
+			<div class="ui-content">
+				<div>
+					<a href="#picturePage" data-transition="slide" data-role="button" data-icon="back" id="back-btn" class="">BACK</a>
+					<a href="#devicePage" data-transition="slide" data-role="button" data-icon="forward" id="forward-btn">NEXT</a>
+				</div>
+				<p id="devicePG">My Device</p>
+				<ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow" id="listList">
+					<li>
+						Cordova version:
+						<span id="cordovaVersion"></span>
+					</li>
+					<li>
+						Device's manufacturer:
+						<span id="manufacturer"></span>
+					</li>
+					<li>
+						Is it running on a simulator:
+						<span id="isVirtual"></span>
+					</li>
+					<li>
+						Device's model:
+						<span id="deviceModel"></span>
+					</li>
+					<li>
+						Device's operating system:
+						<span id="operatingSystem"></span>
+					</li>
+					<li>
+						Operating system version:
+						<span id="osVersion"></span>
+					</li>
+					<li>
+						Universally Unique Identifier:
+						<span id="uuid"></span>
+					</li>
+					<li>
+						Device hardware serial number:
+						<span id="serial"></span>
+					</li>
+					<li>
+						Battery Percentage:
+						<span id="batteryStatus"></span>
+					</li>
+					<li>
+						Is Plugged:
+						<span id="isPlugged"></span>
+					</li>
+					<li>
+						Connection type:
+						<span id="connectionType"></span>
+					</li>
+				</ul>	
+				<p id="locationPG">This is my Location</p>
+				<ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow" id="listList">
+					<li>
+						Latitude:
+						<span id="latitude-value"></span>
+					</li>
+					<li>
+						Longitude:
+						<span id="longitude-value"></span>
+					</li>
+					<li>
+						Altitude (m):
+						<span id="altitude-value"></span>
+					</li>
+					<li>
+						Accuracy (m):
+						<span id="accuracy-value"></span>
+					</li>
+					<li>
+						Altitude accuracy (m):
+						<span id="altitudeAccuracy-value"></span>
+					</li>
+				</ul>
+			</div><!-- end page 3 content -->
+			
+			<div data-role="footer" data-position="fixed">
+				<p id="pictureParagraph">Make picture
+					<a href="#picturePage" data-transition="slide" data-role="button" data-icon="camera">Camera</a>
+				</p>
+			</div><!-- /footer -->
+		</div><!-- /page3 -->
+<script src="cordova.js"></script><script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script><script type="text/javascript" id="jqm-trans-disable">
+		/* For having a faster transition */
+		$(document).on("mobileinit", function() {
+				$.mobile.defaultPageTransition = "none";
+				$.mobile.defaultDialogTransition = "none";
+		});
+		</script><script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script><script src="js/index.js"></script></body>
+</html>
