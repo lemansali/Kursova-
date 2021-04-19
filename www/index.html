@@ -7,9 +7,23 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <meta name="color-scheme" content="light dark">
+		<title>Virtual Library</title>
         <link rel="stylesheet" href="css/index.css">
+		<link rel="stylesheet" href="css/book-library.css">
 		<link rel="stylesheet" type="text/css" href="js/jquery-1.5.0.mobile.min.css">
 		<style>
+			#devicePage{
+				background-color:whitesmoke;
+				font-family: 'Pacifico', cursive;
+			}
+			#picturePage{
+				font-family: 'Pacifico', cursive;
+			}
+			#locationPage{
+				font-family: 'Pacifico', cursive;
+			}
+
+
 		/* For avoiding title truncation in wp8 */
 		.ui-header .ui-title {
 				overflow: visible !important;
@@ -32,12 +46,14 @@
 			float: left;
 			text-align: center;
 			width: 50px;
+			font-family: 'Pacifico', cursive;
 		}
 
 		#forward-btn {
 			float: right;
 			text-align: center;
 			width: 50px;
+			font-family: 'Pacifico', cursive;
 		}
 		</style>
         <title>Hello World</title>
@@ -65,8 +81,8 @@
 							<a href="#" id="linkHome">Home</a>
 							<a href="#" id="linkLogin">Login</a>
 							<a href="#" id="linkRegister">Register</a>
-							<a href="#picturePage" id="linkListBooks">List Books</a>
-							<a href="##picturePage" id="linkCreateBook">Create Book</a>
+							<a href="#" id="linkListBooks">List Books</a>
+							<a href="#" id="linkCreateBook">Create Book</a>
 							<a href="#" id="linkLogout">Logout</a>
 							<span id="loggedInUser"></span>
 						</header>
@@ -171,6 +187,10 @@
 					<a href="#locationPage" data-transition="slide" data-role="button" data-icon="forward" id="forward-btn">NEXT</a>
 				</div>
 				<p id="picturePG">Picture Page</p>
+				<div><img src="" alt="" id="myImage"></div>
+				<div><button id="camera-btn" data-role="button">CLICK</button></div>
+				<img src="" alt="picture-view" id="picture-view" height="200" width="200">
+				<button id="addPicture">Add Picture</button>
 			</div><!-- end page 2 content -->
 			
 			<div data-role="footer" data-position="fixed">
